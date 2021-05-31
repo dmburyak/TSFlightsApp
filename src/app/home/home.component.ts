@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FlightService } from '../flight.service';
+import { Flight } from '../flight.model';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  flights!: Flight[];
+
+  constructor(private flightService: FlightService) { }
 
   ngOnInit(): void {
+    this.flights = this.flightService.getFlights();
   }
 
 }

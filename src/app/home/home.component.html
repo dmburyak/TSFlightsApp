@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div>
+  <div *ngFor="let flight of flights" class="flight-results">
+    <div class="flight-number">{{flight.flightNumber}}</div>
+    <div class="departs">{{flight.depart | date}}</div>
+    <div class="departs">{{flight.arrive | date}}</div>
+    <div class="arrives">{{flight.destination}}</div>
+    <div class="nonstop">{{flight.nonstop}}</div>
+  </div>
+</div>
