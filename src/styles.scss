@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("assets/mountains.jpeg") no-repeat;
+  background-size: cover;
+}
+
+header {
+  width: 100vw;
+  height: 100px;
+  background-color: white;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo_box {
+    margin: 10px 20px;
+    height: 80px;
+    width: 250px;
+    background: url("assets/TsFlightsHorizLogo.jpg") no-repeat;
+    background-size: contain;
+    background-position-y: center;
+    align-self: flex-start;
+
+    @media screen and (max-width: 497px) {
+      width: 200px;
+      margin-left: 4px;
+      margin-top: 7px;
+    }
+  }
+
+  .link_box {
+    margin: 18px 10px;
+    height: 80px;
+
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      width: 100px;
+      height: 30px;
+      border-radius: 9px;
+      color: white;
+      text-align: center;
+      background-color: #415D65;
+    }
+  }
+}
