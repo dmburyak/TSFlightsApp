@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Flight } from './flight.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,35 +9,38 @@ import { Flight } from './flight.model';
 
 export class FlightService {
 
-  flights: Flight[] = [
-    {
-      origin: 'Miami',
-      destination: 'Chicago',
-      flightNumber: 345,
-      depart: '2020-02-25T23:18:21.932Z',
-      arrive: '2020-02-25T23:21:21.932Z',
-      nonstop: true
-    },
-    {
-      origin: 'New York', destination: 'Los Angeles', flightNumber: 432,
-      depart: '2020-05-25T23:18:00.932Z',
-      arrive: '2020-05-25T23:23:21.932Z', nonstop: false
-    },
-  ];
+  flights: Flight[] = [];
+  backEndUrl = 'http://localhost:3000';
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  getFlights(): Flight[] {
-    return this.flights;
+  getFlights(orig: string, dest: string): Observable<any> {
+    return this.http.get(`${this.backEndUrl}/flights/query/${orig}/${dest}`);
+  }
+
+  getAllOrigins(): Observable<any> {
+    return this.http.get(`${this.backEndUrl}/flights/cities/origins`)
+  }
+  getAllDestinations(): Observable<any> {
+    return this.http.get(`${this.backEndUrl}/flights/cities/destinations`)
   }
 
   postFlight(flight: Flight) {
-
+    return this.http.post(`${this.backEndUrl}/flights`, flight)
+      .subscribe(data => console.log('data posted to server!'))
   }
 
-  deleteFlight(id: number) {
-
+  updateFlight(flight: Flight) {
+    return this.http.patch(`${this.backEndUrl}/flights/${flight.id}/update`,flight);
   }
 
+  deleteFlight(id: string | undefined) {
+    return this.http.delete(`${this.backEndUrl}/flights/${id}/delete`);
+  }
+
+  getAllFlights(): Observable<any> {
+    return this.http.get(`${this.backEndUrl}/flights`);
+  }
 }
+
